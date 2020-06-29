@@ -10,8 +10,7 @@ export class AppComponent {
   title = 'material-demo';
 
   constructor(private http: NetworkService)  {
-    this.http.getUsers()
-      .subscribe(data => console.log(data))
+
   }
 
 
