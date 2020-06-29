@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoreComponentsModule } from './components/core-components.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NetworkingModule } from './networking/networking.module';
+
+
 
 @NgModule({
   declarations: [
@@ -10,7 +16,10 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CoreComponentsModule,
+    NetworkingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

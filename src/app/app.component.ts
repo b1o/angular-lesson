@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NetworkService } from './networking/network.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'material-demo';
+
+  constructor(private http: NetworkService)  {
+    this.http.getUsers()
+      .subscribe(data => console.log(data))
+  }
+
+
+  public test() {
+    console.log('button press')
+  }
 }
