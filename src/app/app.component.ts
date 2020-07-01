@@ -10,8 +10,8 @@ export class AppComponent {
   title = 'material-demo';
 
   constructor(private http: NetworkService)  {
-    this.http.getUsers()
-      .subscribe(data => console.log(data))
+    this.http.updatePost(1, {body: 'new body'})
+      .subscribe(response => { console.log(response); });
   }
 
 

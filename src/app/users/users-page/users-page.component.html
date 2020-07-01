@@ -1,0 +1,14 @@
+<h2>Users</h2>
+<div>
+<mat-list>
+  <mat-list-item *ngFor="let user of users">
+    <mat-icon matListIcon>face</mat-icon>
+    <h3 matLine> {{user.name}} </h3>
+    <p style="color: lightgray" matLine>{{user.email}}
+    </p>
+    <button mat-icon-button (click)="navigateToDetails(user.id)">
+      <mat-icon>info</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
+</div>
