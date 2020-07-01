@@ -1,1 +1,11 @@
-<p>Details page for user  with id: {{userId}}</p>
+<div *ngIf="(user$ | async) as testUser">
+
+    <!-- use flexbox -->
+  {{testUser.name}}
+
+    <button mat-raised-button>Add</button>
+</div>
+
+<div *ngIf="(posts$ | async) as posts">
+    <app-post [post]="post" *ngFor="let post of posts"></app-post>
+</div>
