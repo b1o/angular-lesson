@@ -1,0 +1,23 @@
+<mat-card style="padding: 2vh 3vh;">
+  <mat-card-header>
+    <mat-card-title>Create A Post</mat-card-title>
+  </mat-card-header>
+  <!--a 100 better ways to do it , are 100 less "ways" of sleep :) -->
+  <mat-card-content>
+    <div class="register-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Post Title</mat-label>
+        <input matInput placeholder="Ex. One Shot Full AP Nidalee Jng s10" #title >
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment...</mat-label>
+        <textarea matInput placeholder="Ex. It makes me tingle" #comment></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)="Submit(title.value,comment.value)">Create</button>
+  </mat-card-actions>
+</mat-card>

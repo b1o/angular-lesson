@@ -1,0 +1,21 @@
+.spread{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    align-items: center;
+    padding: 1rem;
+    h3{
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+    button{
+        background-color: #fa3d77;
+        color: white;
+        &:hover{
+          background-color: darken($color: #fa3d77, $amount: 14%);
+        }
+    }
+}

@@ -8,16 +8,18 @@ import { CoreComponentsModule } from './components/core-components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NetworkingModule } from './networking/networking.module';
 import { ReverseStringPipe } from './components/pipes/reverse-string.pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     CoreComponentsModule,
     NetworkingModule

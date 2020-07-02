@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {delay} from 'rxjs/operators'
 import { Observable, Subject } from 'rxjs';
@@ -22,7 +22,7 @@ export class UserDetailsPageComponent implements OnInit {
   public name = "gosho  and pesho";
 
 
-  constructor(private http: NetworkService, private activatedRoute: ActivatedRoute) {
+  constructor(private http: NetworkService, private activatedRoute: ActivatedRoute,private router:Router) {
     this.activatedRoute.paramMap
       .subscribe(params => {
         this.userId = params.get('id');
@@ -34,5 +34,6 @@ export class UserDetailsPageComponent implements OnInit {
   }
   ngOnInit(): void {
   }
+
 
 }
