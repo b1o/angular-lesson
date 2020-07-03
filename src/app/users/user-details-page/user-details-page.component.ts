@@ -17,22 +17,28 @@ export class UserDetailsPageComponent implements OnInit {
 
   public user$: Observable<User>;
   public posts$: Observable<Post[]>;
-
+  public add = false;
   public user: User;
-  public name = "gosho  and pesho";
 
 
   constructor(private http: NetworkService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap
       .subscribe(params => {
         this.userId = params.get('id');
-      })
+      });
 
     this.user$ = this.http.getUserById(this.userId)
 
     this.posts$ = this.http.getPostsByUserId(this.userId)
   }
   ngOnInit(): void {
+  }
+
+  addPost() {
+    this.add = true;
+  }
+  back() {
+    this.add = false;
   }
 
 }

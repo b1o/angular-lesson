@@ -1,11 +1,19 @@
 <div *ngIf="(user$ | async) as testUser">
 
     <!-- use flexbox -->
-  {{testUser.name}}
-
-    <button mat-raised-button>Add</button>
+    <div *ngIf="!add" id="head">
+      <div id="username">{{testUser.name}}</div>
+      <div id="add-btn">
+        <button mat-raised-button (click)="addPost()" color="primary">Add</button>
+      </div>
+    </div>
 </div>
 
-<div *ngIf="(posts$ | async) as posts">
+<div *ngIf="!add && (posts$ | async) as posts">
     <app-post [post]="post" *ngFor="let post of posts"></app-post>
+</div>
+
+<div *ngIf="add">
+  <button mat-button color="accent" (click)="back()">BACK</button>
+  <app-add-post></app-add-post>
 </div>
