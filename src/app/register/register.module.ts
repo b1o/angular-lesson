@@ -6,7 +6,7 @@ import { MaterialModule } from '../material/material.module';
 
 const routes: Route[] = [
   {path: '', component: RegisterPageComponent}
-]
+];
 
 
 @NgModule({

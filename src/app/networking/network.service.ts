@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {User} from '../users/models/user';
+import {Post} from '../users/models/post';
 
 @Injectable()
 export class NetworkService {
@@ -15,6 +16,10 @@ export class NetworkService {
 
   public getUserById(id) {
     return this.http.get<User>(this.baseUrl + 'users/' + id);
+  }
+
+  public getPostsByUserId(id){
+    return this.http.get<Post[]>(this.baseUrl + 'posts', {params: {userId: id}});
   }
 
   public getPosts() {

@@ -1,52 +1,10 @@
-<p>Details page for user with id {{userId}}!</p>
-<mat-list>
-  <mat-list-item>
-    <mat-icon matListIcon>face</mat-icon>
-    <div mat-line>Name:</div>
-    <div mat-line>{{user.name}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>account_circle</mat-icon>
-    <div mat-line>Username:</div>
-    <div mat-line>{{user.username}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>email</mat-icon>
-    <div mat-line>Email:</div>
-    <div mat-line>{{user.email}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>place</mat-icon>
-    <div mat-line>Address:</div>
-    <div mat-line>{{user.address.city}}</div>
-    <div mat-line>{{user.address.street}}, {{user.address.suite}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>all_inbox</mat-icon>
-    <div mat-line>Zipcode:</div>
-    <div mat-line>{{user.address.zipcode}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>my_location</mat-icon>
-    <div mat-line>Geo location:</div>
-    <div mat-line>Latitude: {{user.address.geo.lat}}, Longitude: {{user.address.geo.lng}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>local_phone</mat-icon>
-    <div mat-line>Phone:</div>
-    <div mat-line>{{user.phone}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>web</mat-icon>
-    <div mat-line>Website:</div>
-    <div mat-line>{{user.website}}</div>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon matListIcon>business</mat-icon>
-    <div mat-line>Company:</div>
-    <div mat-line>{{user.company.name}}</div>
-    <div mat-line>{{user.company.catchPhrase}}</div>
-    <div mat-line>{{user.company.bs}}</div>
-  </mat-list-item>
-  <mat-list-item></mat-list-item>
-</mat-list>
+<div *ngIf="(user$ | async) as user" class="user-details">
+  <div>{{user.name}}</div>
+  <button mat-raised-button (click)="navigateToCreate()">Add post</button>
+</div>
+
+<div *ngIf="(posts$ | async) as posts">
+  <div *ngFor="let post of posts">
+    <app-post [post]="post"></app-post>
+  </div>
+</div>
