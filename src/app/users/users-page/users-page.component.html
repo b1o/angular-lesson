@@ -2,13 +2,13 @@
 
 <div>
   <mat-list>
-   <mat-list-item *ngFor="let user of users">
-     <mat-icon matListIcon>face</mat-icon>
-    <h3 matLine>{{user.name}}</h3>
-    <p style="color: lightgray" matLine>{{user.email}}</p>
-    <button (click)="navigateToDetails(user.id)" mat-icon-button >
+    <mat-list-item *ngFor="let user of users">
+      <mat-icon matListIcon>face</mat-icon>
+      <h3 matLine>{{user.name}}</h3>
+      <p style="color: lightgray" matLine>{{user.email}}</p>
+      <button (click)="navigateToDetails(user.id)" mat-icon-button>
         <mat-icon>arrow_forward</mat-icon>
-    </button>
-   </mat-list-item>
+      </button>
+    </mat-list-item>
   </mat-list>
 </div>

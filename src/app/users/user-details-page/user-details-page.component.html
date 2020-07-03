@@ -1,7 +1,7 @@
 <div *ngIf="(user$ | async) as testUser">
   <div class="space-between py-10">
     {{testUser.name}}
-    <button mat-raised-button>Add</button>
+    <button mat-raised-button (click)="navigateToAddNewPost()">Add</button>
   </div>
 </div>
 

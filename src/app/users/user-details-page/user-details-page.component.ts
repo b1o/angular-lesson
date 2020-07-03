@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {delay} from 'rxjs/operators'
-import { Observable, Subject } from 'rxjs';
-import { User } from '../models/user';
-import { NetworkService } from 'src/app/networking/network.service';
-import { Post } from '../models/post';
+import {Observable, Subject} from 'rxjs';
+import {User} from '../models/user';
+import {NetworkService} from 'src/app/networking/network.service';
+import {Post} from '../models/post';
 
 @Component({
   selector: 'app-user-details-page',
@@ -22,7 +22,7 @@ export class UserDetailsPageComponent implements OnInit {
   public name = "gosho  and pesho";
 
 
-  constructor(private http: NetworkService, private activatedRoute: ActivatedRoute) {
+  constructor(private http: NetworkService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap
       .subscribe(params => {
         this.userId = params.get('id');
@@ -32,7 +32,11 @@ export class UserDetailsPageComponent implements OnInit {
 
     this.posts$ = this.http.getPostsByUserId(this.userId)
   }
+
   ngOnInit(): void {
   }
 
+  navigateToAddNewPost() {
+    this.router.navigateByUrl('/users/' + this.userId + '/posts/create')
+  }
 }

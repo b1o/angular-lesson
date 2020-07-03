@@ -33,7 +33,6 @@ export class NetworkService {
       body: postBody,
       userId: userId
     };
-
     return this.http.post(this.baseUrl + 'posts', data)
   }
 
