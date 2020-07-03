@@ -1,0 +1,24 @@
+<mat-card class="form-container">
+  <mat-card-header>
+    <mat-card-title>Create new post</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="create-post-form">
+      <mat-form-field>
+        <mat-label>Post title</mat-label>
+        <input autocomplete="off" matInput type="text" [(ngModel)]="postTitle">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Post body</mat-label>
+        <textarea autocomplete="off" matInput type="text" [(ngModel)]="postBody"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions [align]="'end'">
+    <button mat-button routerLink="../" color="primary">Cancel</button>
+    <button mat-raised-button (click)="onAddPost()" color="accent">Create</button>
+  </mat-card-actions>
+</mat-card>

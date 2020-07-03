@@ -1,11 +1,11 @@
-<div *ngIf="(user$ | async) as testUser">
+<div class="heading">
 
     <!-- use flexbox -->
-  {{testUser.name}}
+  {{user?.name}}
 
-    <button mat-raised-button>Add</button>
+    <button routerLink="./create" mat-raised-button color="accent">Add</button>
 </div>
 
-<div *ngIf="(posts$ | async) as posts">
+<div >
     <app-post [post]="post" *ngFor="let post of posts"></app-post>
 </div>

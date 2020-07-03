@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { NetworkService } from 'src/app/networking/network.service';
 import { Post } from '../models/post';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -15,22 +16,23 @@ import { Post } from '../models/post';
 export class UserDetailsPageComponent implements OnInit {
   public userId;
 
-  public user$: Observable<User>;
-  public posts$: Observable<Post[]>;
-
   public user: User;
-  public name = "gosho  and pesho";
+  public posts: Post[] = [];
 
 
-  constructor(private http: NetworkService, private activatedRoute: ActivatedRoute) {
+  constructor(private data: DataService, private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap
       .subscribe(params => {
         this.userId = params.get('id');
       })
 
-    this.user$ = this.http.getUserById(this.userId)
+    this.data.users$.subscribe(data => {
+      this.user = data.find(u => u.id == this.userId);
+    })
 
-    this.posts$ = this.http.getPostsByUserId(this.userId)
+    this.data.posts$.subscribe(postsTable => this.posts = postsTable[this.userId])
+
+    this.data.getPostsByUserId(this.userId)
   }
   ngOnInit(): void {
   }

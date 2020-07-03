@@ -34,7 +34,7 @@ export class NetworkService {
       userId: userId
     };
 
-    return this.http.post(this.baseUrl + 'posts', data)
+    return this.http.post<Post>(this.baseUrl + 'posts', data)
   }
 
   public updatePost(postId, changes)  {
