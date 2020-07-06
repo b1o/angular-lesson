@@ -14,7 +14,7 @@ export class UsersPageComponent implements OnInit {
   public users: User[] = [];
 
   constructor(private data: DataService, private router: Router) {
-    this.data.users$.subscribe(users => this.users = users)
+    this.data.getUsers().subscribe(users => this.users = users)
   }
 
   ngOnInit(): void {

@@ -3,19 +3,57 @@ import { User } from '../models/user';
 import { NetworkService } from 'src/app/networking/network.service';
 import { Subject, BehaviorSubject } from 'rxjs';
 import { Post } from '../models/post';
+import { map, reduce, tap } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
 
   private userIdPostsMappingTable: { [key: number]: Post[] } = {}
 
-  public users$: BehaviorSubject<User[]> = new BehaviorSubject([]) ;
-  public posts$: BehaviorSubject<{ [key: number]: Post[] }> = new BehaviorSubject([]);
+  private users$: BehaviorSubject<User[]> = new BehaviorSubject([]) ;
+  private posts$: BehaviorSubject<{ [key: number]: Post[] }> = new BehaviorSubject([]);
 
 
   constructor(private network: NetworkService) {
     this.network.getUsers()
-    .subscribe(data => this.users$.next(data));
+      .subscribe(data => this.users$.next(data));
+
+    this.network.getPosts()
+      .subscribe(posts => {
+        console.log(posts)
+        for(const post of posts) {
+          const postWithLikes = {...post, likes: Math.floor(Math.random() * 101)};
+
+          if(!this.userIdPostsMappingTable[postWithLikes.userId])  {
+            this.userIdPostsMappingTable[postWithLikes.userId] = [];
+          }
+
+          this.userIdPostsMappingTable[postWithLikes.userId].push(postWithLikes)
+        }
+
+        this.posts$.next(this.userIdPostsMappingTable);
+      })
+  }
+
+  getUsers() {
+    return this.users$.asObservable();
+  }
+
+  getPosts()  {
+    return this.posts$.asObservable();
+  }
+
+  getPopularPosts() {
+    const reducer = (acc, value) => [...acc, ...value];
+
+    return this.posts$.pipe(
+      map(mappingTable => Object.keys(mappingTable)
+        .map(key => mappingTable[key])
+        .reduce(reducer, [])
+        .filter(post => post.likes > 50)
+        .sort((post1, post2) => post2.likes - post1.likes)
+      )
+    )
   }
 
   public createPostForUser(userId, post: Post) {
@@ -38,6 +76,8 @@ export class DataService {
     this.network.getPostsByUserId(userId)
       .subscribe(posts => {
         console.log('getting posts for user with id:' + userId)
+
+
         this.userIdPostsMappingTable[userId] = posts;
 
         this.posts$.next(this.userIdPostsMappingTable);

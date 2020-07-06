@@ -1,0 +1,3 @@
+<div class="posts-container">
+  <app-post [post]="post"  *ngFor="let post of data.getPopularPosts() | async"></app-post>
+</div>

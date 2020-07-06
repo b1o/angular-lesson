@@ -10,6 +10,13 @@
     <div class="post-body">
       {{post.body}}
     </div>
+    <div class="likes">
+      <p>Likes: {{post.likes}}</p>
+    </div>
   </mat-card-content>
 
+
+  <mat-card-actions>
+    <button  mat-button  (click)="deletePost()" >Delete  Post</button>
+  </mat-card-actions>
 </mat-card>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkService } from 'src/app/networking/network.service';
 import { Post } from '../models/post';
@@ -9,12 +9,13 @@ import { DataService } from '../services/data.service';
   templateUrl: './create-post-page.component.html',
   styleUrls: ['./create-post-page.component.scss']
 })
-export class CreatePostPageComponent implements OnInit {
+export class CreatePostPageComponent implements OnInit, OnChanges {
 
   userId: number;
   postTitle: string;
   postBody: string;
 
+  testCOunter = 0;
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private router: Router) {
     this.route.paramMap.subscribe(
@@ -28,11 +29,21 @@ export class CreatePostPageComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  test() {
+    this.testCOunter++
+  }
+
+  ngOnChanges() {
+    console.log('on changes')
+  }
+
   onAddPost() {
     const post: Post = {
       title: this.postTitle,
       body: this.postBody,
-      userId: this.userId
+      userId: this.userId,
+      likes: 0
     }
 
     this.dataService.createPostForUser(this.userId, post);

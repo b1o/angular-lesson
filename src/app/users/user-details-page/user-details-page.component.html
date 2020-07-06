@@ -7,5 +7,5 @@
 </div>
 
 <div >
-    <app-post [post]="post" *ngFor="let post of posts"></app-post>
+    <app-post (delete)="onDeletePost(post)" [post]="post" *ngFor="let post of posts"></app-post>
 </div>
