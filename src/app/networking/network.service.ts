@@ -32,7 +32,7 @@ export class NetworkService {
       body: postBody,
       userId: postUserId
     };
-    return this.http.patch(this.baseUrl + 'posts', data);
+    return this.http.post<Post>(this.baseUrl + 'posts', data);
   }
 
   public updatePost(postId, changes){

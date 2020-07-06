@@ -1,1 +1,24 @@
-<p>create-post works!</p>
+<mat-card class="form-container">
+  <mat-card-header>
+    <mat-card-title>Add post:</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="create-post-form">
+      <mat-form-field>
+    <mat-label>Post title:</mat-label>
+  <input matInput type="text" [(ngModel)]="title">
+      </mat-form-field>
+
+      <mat-form-field>
+    <mat-label>Post content:</mat-label>
+    <textarea matInput type="text" [(ngModel)]="body" rows="5"></textarea>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-button color="primary" routerLink="../">Cancel</button>
+  <button mat-raised-button color="accent" type="button" (click)="onAddPost()">Add</button>
+  </mat-card-actions>
+</mat-card>

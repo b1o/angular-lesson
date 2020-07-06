@@ -4,6 +4,7 @@ import {NetworkService} from '../../networking/network.service';
 import {User} from '../models/user';
 import {Observable} from 'rxjs';
 import {Post} from '../models/post';
+import {DataService} from '../services/data.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -12,17 +13,19 @@ import {Post} from '../models/post';
 })
 export class UserDetailsPageComponent implements OnInit {
   public userId;
-  public user$: Observable<User>;
-  public posts$: Observable<Post[]>;
+  public user: User;
+  public posts: Post[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private network: NetworkService, private router: Router) {
+  constructor(private data: DataService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.activatedRoute.paramMap
       .subscribe(params => {
         this.userId = params.get('id');
       });
-
-    this.user$ = this.network.getUserById(this.userId);
-    this.posts$ = this.network.getPostsByUserId(this.userId);
+    this.data.users$.subscribe(data => {
+      this.user = data.find(u => u.id == this.userId);
+      this.data.posts$.subscribe(postsTable => this.posts = postsTable[this.userId]);
+      this.data.getPostsByUsedId(this.userId);
+    });
   }
   navigateToCreate(){
     this.router.navigateByUrl('users/' + this.userId + '/create/');

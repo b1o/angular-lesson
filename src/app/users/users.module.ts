@@ -7,6 +7,8 @@ import { UserDetailsPageComponent } from './user-details-page/user-details-page.
 import {ReverseStringPipe} from '../components/pipes/reverse-string.pipe';
 import { PostComponent } from './components/post/post.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
+import {FormsModule} from '@angular/forms';
+import {DataService} from './services/data.service';
 
 const routes: Route [] = [
   {path: '', component: UsersPageComponent},
@@ -19,7 +21,9 @@ const routes: Route [] = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModule
-  ]
+    MaterialModule,
+    FormsModule
+  ],
+  providers: [DataService]
 })
 export class UsersModule { }
