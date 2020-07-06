@@ -40,10 +40,6 @@ export class UserDetailsPageComponent implements OnInit, OnChanges, OnDestroy {
     )
 
     this.data.getPostsByUserId(this.userId);
-
-    this.subscriptions.push(
-      this.data.getPopularPosts().subscribe(posts => console.log('popular', posts))
-    )
   }
 
   ngOnChanges(changes: SimpleChanges): void {
