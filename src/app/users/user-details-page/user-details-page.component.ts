@@ -51,8 +51,8 @@ export class UserDetailsPageComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onDeletePost(post: Post) {
-    console.log(post)
-    this.posts = this.posts.filter(p => p.id != post.id)
+    // this.posts = this.posts.filter(p => p.id != post.id)
+    this.data.deletePost(post);
   }
 
   ngOnInit(): void {
