@@ -5,6 +5,7 @@ import {Subject, BehaviorSubject, Observable} from 'rxjs';
 import {Post} from '../models/post';
 import {filter, map, reduce, startWith, tap} from 'rxjs/operators';
 import {Router} from "@angular/router";
+import index from "@angular/cli/lib/cli";
 
 @Injectable()
 export class DataService {
@@ -136,16 +137,20 @@ export class DataService {
     //   )
 
     // 4-ti opit - greda. Pretty destrictive one... it deletes all posts for all users.
-    console.log(this.userIdPostsMappingTable);
-    let test: any =
-      map(mappingTable => Object.keys(mappingTable)
-        .map(key => mappingTable[key])
-        .filter((p) => p.id != deletedPost.id)
-      )
+    // console.log(this.userIdPostsMappingTable);
+    // let test: any =
+    //   map(mappingTable => Object.keys(mappingTable)
+    //     .map(key => mappingTable[key])
+    //     .filter((p) => p.id != deletedPost.id)
+    //   )
     //
     // this.userIdPostsMappingTable[deletedPost.userId].filter((p) => p.id != deletedPost.id)
 
-    this.posts$.next(test);
-  }
+    // this.posts$.next(test);
 
+    // 5-ti opit s pomo6t ot Dani, no pak ne trie.
+    this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id)
+    this.posts$.next(this.userIdPostsMappingTable);
+
+  }
 }
