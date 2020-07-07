@@ -107,18 +107,18 @@ export class DataService {
 
 
     // 2-ri opit -> porednata greda...
-    this.posts$
-      .subscribe(posts => {
-        console.log(posts)
-
-        for (let post of Object.keys(posts)) {
-          this.userIdPostsMappingTable[post].filter(p => p.id != deletedPost.id)
-          console.log(this.userIdPostsMappingTable)
-        }
-
-      })
-
-      this.posts$.next(this.userIdPostsMappingTable);
+    // this.posts$
+    //   .subscribe(posts => {
+    //     console.log(posts)
+    //
+    //     for (let post of Object.keys(posts)) {
+    //       this.userIdPostsMappingTable[post].filter(p => p.id != deletedPost.id)
+    //       console.log(this.userIdPostsMappingTable)
+    //     }
+    //
+    //   })
+    //
+    //   this.posts$.next(this.userIdPostsMappingTable);
 
     // 3-ti opit - da rabotq sys stream-a ot network service-a, koeto posle ustanovih, 4e ne ok.
     // this.network.getPosts()
@@ -135,6 +135,17 @@ export class DataService {
     //     }
     //   )
 
+    // 4-ti opit - greda. Pretty destrictive one... it deletes all posts for all users.
+    console.log(this.userIdPostsMappingTable);
+    let test: any =
+      map(mappingTable => Object.keys(mappingTable)
+        .map(key => mappingTable[key])
+        .filter((p) => p.id != deletedPost.id)
+      )
+    //
+    // this.userIdPostsMappingTable[deletedPost.userId].filter((p) => p.id != deletedPost.id)
+
+    this.posts$.next(test);
   }
 
 }
