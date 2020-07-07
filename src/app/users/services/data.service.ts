@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user';
 import {NetworkService} from 'src/app/networking/network.service';
-import {Subject, BehaviorSubject} from 'rxjs';
+import {Subject, BehaviorSubject, Observable} from 'rxjs';
 import {Post} from '../models/post';
 import {filter, map, reduce, startWith, tap} from 'rxjs/operators';
 import {Router} from "@angular/router";
@@ -91,16 +91,49 @@ export class DataService {
 
   public deletePost(deletedPost) {
 
-    console.log(deletedPost)
-    console.log(deletedPost.id)
-    console.log(this.posts$);
+    // console.log(deletedPost)
+    // console.log(deletedPost.id)
+    // console.log(this.posts$)
 
-    this.posts$.pipe(
-      map(mappingTable => Object.keys(mappingTable)
-        .map(key => mappingTable[key])
-        .filter(post => post.id != deletedPost.id)
-      )
-    )
+    // 1-vi opit...
+    // this.posts$.pipe(
+    //   map(mappingTable => Object.keys(mappingTable)
+    //     .map(key => mappingTable[key])
+    //     .filter(mappingTable => mappingTable != deletedPost)
+    //     .filter(post => post.id != deletedPost.id)
+    //   )
+    // )
+    //
+
+
+    // 2-ri opit -> porednata greda...
+    this.posts$
+      .subscribe(posts => {
+        console.log(posts)
+
+        for (let post of Object.keys(posts)) {
+          this.userIdPostsMappingTable[post].filter(p => p.id != deletedPost.id)
+          console.log(this.userIdPostsMappingTable)
+        }
+
+      })
+
+      this.posts$.next(this.userIdPostsMappingTable);
+
+    // 3-ti opit - da rabotq sys stream-a ot network service-a, koeto posle ustanovih, 4e ne ok.
+    // this.network.getPosts()
+    //   .subscribe(posts => {
+    //       console.log(posts)
+    //       for (const post of posts) {
+    //         const updatedPosts = posts.filter(p => p.id != deletedPost.id)
+    //
+    //         this.userIdPostsMappingTable[updatedPosts.userId].push(updatedPosts)
+    //       }
+    //
+    //       this.posts$.next(this.userIdPostsMappingTable);
+    //
+    //     }
+    //   )
 
   }
 
