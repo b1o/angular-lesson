@@ -8,9 +8,11 @@ import { DataService } from '../services/data.service';
 })
 export class PopularPostsPageComponent implements OnInit {
 
-  constructor(public  data: DataService) { }
+  constructor(public data: DataService) { }
 
   ngOnInit(): void {
   }
-
+  onDeletePost(post) {
+    this.data.deletePosts(post)
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {delay} from 'rxjs/operators'
+import { delay } from 'rxjs/operators'
 import { Observable, Subject, Subscription } from 'rxjs';
 import { User } from '../models/user';
 import { NetworkService } from 'src/app/networking/network.service';
@@ -46,20 +46,24 @@ export class UserDetailsPageComponent implements OnInit, OnChanges, OnDestroy {
     console.log(changes)
   }
 
-  forceDetection(){
+  forceDetection() {
     this.cd.detectChanges()
   }
 
   onDeletePost(post: Post) {
     console.log(post)
-    this.posts = this.posts.filter(p => p.id != post.id)
+    this.data.deletePosts(post)
+    this.data.getUsers().subscribe(data => {
+      this.user = data.find(u => u.id == this.userId);
+    })
+    // this.posts = this.posts.filter(p => p.id != post.id)
   }
 
   ngOnInit(): void {
   }
 
-  ngOnDestroy(){
-    for  (const sub of this.subscriptions)  {
+  ngOnDestroy() {
+    for (const sub of this.subscriptions) {
       sub.unsubscribe();
     }
   }

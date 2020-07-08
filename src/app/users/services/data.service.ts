@@ -10,7 +10,7 @@ export class DataService {
 
   private userIdPostsMappingTable: { [key: number]: Post[] } = {}
 
-  private users$: BehaviorSubject<User[]> = new BehaviorSubject([]) ;
+  private users$: BehaviorSubject<User[]> = new BehaviorSubject([]);
   private posts$: BehaviorSubject<{ [key: number]: Post[] }> = new BehaviorSubject([]);
 
 
@@ -21,10 +21,10 @@ export class DataService {
     this.network.getPosts()
       .subscribe(posts => {
         console.log(posts)
-        for(const post of posts) {
-          const postWithLikes = {...post, likes: Math.floor(Math.random() * 101)};
+        for (const post of posts) {
+          const postWithLikes = { ...post, likes: Math.floor(Math.random() * 101) };
 
-          if(!this.userIdPostsMappingTable[postWithLikes.userId])  {
+          if (!this.userIdPostsMappingTable[postWithLikes.userId]) {
             this.userIdPostsMappingTable[postWithLikes.userId] = [];
           }
 
@@ -39,8 +39,19 @@ export class DataService {
     return this.users$.asObservable();
   }
 
-  getPosts()  {
+  getPosts() {
     return this.posts$.asObservable();
+  }
+
+  deletePosts(post: Post) {
+    console.log("delete", this.userIdPostsMappingTable[post.userId])
+    this.userIdPostsMappingTable[post.userId] = this.userIdPostsMappingTable[post.userId].filter(p => p != post)
+    this.posts$.next(this.userIdPostsMappingTable);
+
+    // for (const property of this.userIdPostsMappingTable[post.userId]) {
+    //   console.log(property)
+    // }
+
   }
 
   getPopularPosts() {
@@ -59,7 +70,7 @@ export class DataService {
   public createPostForUser(userId, post: Post) {
     this.network.createPost(post.title, post.body, userId)
       .subscribe(newPost => {
-        if(!this.userIdPostsMappingTable[userId]) {
+        if (!this.userIdPostsMappingTable[userId]) {
           this.userIdPostsMappingTable[userId] = [];
         }
 
@@ -69,7 +80,7 @@ export class DataService {
   }
 
   public getPostsByUserId(userId) {
-    if(this.userIdPostsMappingTable[userId]) {
+    if (this.userIdPostsMappingTable[userId]) {
       return;
     }
 
