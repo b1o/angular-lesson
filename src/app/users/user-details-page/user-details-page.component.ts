@@ -53,9 +53,9 @@ export class UserDetailsPageComponent implements OnInit, OnChanges, OnDestroy {
   onDeletePost(post: Post) {
     console.log(post)
     this.data.deletePosts(post)
-    this.data.getUsers().subscribe(data => {
-      this.user = data.find(u => u.id == this.userId);
-    })
+    // this.data.getUsers().subscribe(data => {
+    //   this.user = data.find(u => u.id == this.userId);
+    // })
     // this.posts = this.posts.filter(p => p.id != post.id)
   }
 
