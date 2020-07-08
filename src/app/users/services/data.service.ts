@@ -10,7 +10,7 @@ import index from "@angular/cli/lib/cli";
 @Injectable()
 export class DataService {
 
-  private userIdPostsMappingTable: { [key: number | string]: Post[] } = {}
+  private userIdPostsMappingTable: { [key: number]: Post[] } = {}
 
   private users$: BehaviorSubject<User[]> = new BehaviorSubject([]);
   private posts$: BehaviorSubject<{ [key: number]: Post[] }> = new BehaviorSubject([]);
