@@ -8,5 +8,9 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <div class="post-body">{{post.body}}</div>
+    <div class="post-likes">Likes: {{post.likes}}</div>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="deletePost()">Delete post</button>
+  </mat-card-actions>
 </mat-card>

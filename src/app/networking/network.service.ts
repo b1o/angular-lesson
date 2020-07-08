@@ -23,7 +23,7 @@ export class NetworkService {
   }
 
   public getPosts() {
-    return this.http.get(this.baseUrl + 'posts');
+    return this.http.get<Post[]>(this.baseUrl + 'posts');
   }
 
   public createPost(postTitle, postBody, postUserId){

@@ -9,15 +9,17 @@ import { PostComponent } from './components/post/post.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import {FormsModule} from '@angular/forms';
 import {DataService} from './services/data.service';
+import { PopularPostsPageComponent } from './popular-posts-page/popular-posts-page.component';
 
 const routes: Route [] = [
   {path: '', component: UsersPageComponent},
+  {path: 'popular', component: PopularPostsPageComponent},
   {path: ':id', component: UserDetailsPageComponent},
   {path: ':id/create', component: CreatePostComponent}
 ];
 
 @NgModule({
-  declarations: [UsersPageComponent, UserDetailsPageComponent, ReverseStringPipe, PostComponent, CreatePostComponent],
+  declarations: [UsersPageComponent, UserDetailsPageComponent, ReverseStringPipe, PostComponent, CreatePostComponent, PopularPostsPageComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

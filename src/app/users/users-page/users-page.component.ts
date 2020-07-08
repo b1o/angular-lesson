@@ -13,9 +13,8 @@ export class UsersPageComponent implements OnInit {
   public users: User[] = [];
 
   constructor(private data: DataService, private router: Router) {
-    this.data.users$.subscribe(data => {
+    this.data.getUsers().subscribe(data => {
       this.users = data;
-      console.log(this.users);
     });
   }
 

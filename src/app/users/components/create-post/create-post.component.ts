@@ -26,6 +26,7 @@ export class CreatePostComponent implements OnInit {
       title: this.title,
       body: this.body,
       userId: this.userId,
+      likes: 0
     };
     this.dataService.createPostForUser(this.userId, post);
     this.router.navigateByUrl('users/' + this.userId);

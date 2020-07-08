@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Post} from '../../models/post';
 
 @Component({
@@ -6,12 +6,19 @@ import {Post} from '../../models/post';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, OnDestroy {
 
   @Input() post: Post;
+  @Output() delete = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  ngOnDestroy() {
+  }
+
+  deletePost(){
+    this.delete.emit();
+  }
 }

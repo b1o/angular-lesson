@@ -1,0 +1,4 @@
+<div class="post-container"></div>
+<app-post [post]="post"
+          *ngFor="let post of data.getPopularPosts() | async"
+          (delete)="onDeletePost(post)"></app-post>
