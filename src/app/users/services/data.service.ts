@@ -10,7 +10,7 @@ import index from "@angular/cli/lib/cli";
 @Injectable()
 export class DataService {
 
-  private userIdPostsMappingTable: { [key: number]: Post[] } = {}
+  private userIdPostsMappingTable: { [key: number | string]: Post[] } = {}
 
   private users$: BehaviorSubject<User[]> = new BehaviorSubject([]);
   private posts$: BehaviorSubject<{ [key: number]: Post[] }> = new BehaviorSubject([]);
@@ -149,8 +149,10 @@ export class DataService {
     // this.posts$.next(test);
 
     // 5-ti opit s pomo6t ot Dani, no pak ne trie.
-    this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id)
-    this.posts$.next(this.userIdPostsMappingTable);
+    let filteredPosts: Post[] = this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id)
 
+    console.log(this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id));
+
+    this.posts$.next(this.userIdPostsMappingTable[deletedPost.userId] = filteredPosts);
   }
 }
