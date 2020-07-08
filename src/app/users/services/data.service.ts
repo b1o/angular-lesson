@@ -90,7 +90,7 @@ export class DataService {
     return this.users$;
   }
 
-  public deletePost(deletedPost) {
+  public deletePost(deletedPost: Post) {
 
     // console.log(deletedPost)
     // console.log(deletedPost.id)
@@ -148,11 +148,16 @@ export class DataService {
 
     // this.posts$.next(test);
 
-    // 5-ti opit s pomo6t ot Dani, no pak ne trie.
-    let filteredPosts: Post[] = this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id)
+    // 5-ti opit s pomo6t ot Dani.
+    // let filteredPosts: Post[] = this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id)
+    // this.userIdPostsMappingTable[deletedPost.userId] = filteredPosts
+    // this.posts$.next(this.userIdPostsMappingTable);
 
-    console.log(this.userIdPostsMappingTable[deletedPost.userId].filter(p => p.id != deletedPost.id));
+    // 6-ti opit - re6enieto ot Dani, no gyrmi za key-a na userIdPostsMappingTable.
+    const userPosts = this.userIdPostsMappingTable[deletedPost.userId];
+    const userPostsUpdated = userPosts.filter(p => p.id != deletedPost.id);
+    this.userIdPostsMappingTable[deletedPost.userId] = userPostsUpdated;
 
-    this.posts$.next(this.userIdPostsMappingTable[deletedPost.userId] = filteredPosts);
+    this.posts$.next(this.userIdPostsMappingTable);
   }
 }
