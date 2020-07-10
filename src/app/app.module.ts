@@ -8,21 +8,20 @@ import { CoreComponentsModule } from './components/core-components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NetworkingModule } from './networking/networking.module';
 import { ReverseStringPipe } from './components/pipes/reverse-string.pipe';
-
-
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreComponentsModule,
-    NetworkingModule
+    NetworkingModule,
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

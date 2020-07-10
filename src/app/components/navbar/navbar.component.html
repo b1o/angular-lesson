@@ -1,13 +1,18 @@
 <mat-toolbar class="navbar" color="primary">
-  <span>{{title}}</span>
+  <span>{{ title }}</span>
   <span class="example-spacer"></span>
-  <button  routerLink="/users" mat-button >
-    Users
-  </button>
-  <button routerLink="/register" mat-button >
-    Register
-  </button>
-  <button  routerLink="/login" mat-button >
-    Login
-  </button>
+  <div *ngIf="isLoggedIn" class="auth-links">
+    <button routerLink="/users" mat-button>
+      Users
+    </button>
+    <button mat-button (click)="logout()">Logout</button>
+  </div>
+  <div *ngIf="!isLoggedIn" class="non-auth-links">
+    <button routerLink="/register" mat-button>
+      Register
+    </button>
+    <button routerLink="/login" mat-button>
+      Login
+    </button>
+  </div>
 </mat-toolbar>

@@ -1,0 +1,28 @@
+<mat-card style="min-width: 300px;" [ngClass]="{ paused: paused }">
+  <mat-card-header style="justify-content: center;">
+    <mat-card-title>Timer</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 16px;
+        font-size: 50px;
+      "
+    >
+      {{ timer }}
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div style="display: flex; justify-content: space-between;">
+      <button (click)="pause()" *ngIf="!paused" mat-button>Pause</button>
+      <button (click)="resume()" *ngIf="paused" mat-button>Resume</button>
+      <button (click)="reset()" mat-button>Reset</button>
+      <button (click)="start()" mat-button>Start</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
