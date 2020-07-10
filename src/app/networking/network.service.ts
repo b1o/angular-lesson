@@ -30,7 +30,8 @@ export class NetworkService {
     const data = {
       title: postTitle,
       body: postBody,
-      userId: postUserId
+      userId: postUserId,
+      likes: 0
     };
     return this.http.post<Post>(this.baseUrl + 'posts', data);
   }
