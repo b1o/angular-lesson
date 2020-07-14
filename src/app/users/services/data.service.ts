@@ -11,6 +11,7 @@ import { map, reduce, tap } from 'rxjs/operators';
 export class DataService {
   private userIdPostsMappingTable: { [key: number]: Post[] } = {};
 
+  form: {key: string, value: string} | null;
   private users$: BehaviorSubject<User[]> = new BehaviorSubject([]);
   private posts$: BehaviorSubject<{
     [key: number]: Post[];

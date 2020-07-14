@@ -8,24 +8,7 @@ import {
   AbstractControl,
   FormBuilder,
 } from '@angular/forms';
-
-export function hasSpecialChar(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const specialChars = ['!', '@', '#', '$', '%'];
-    const value: string = control.value;
-    if (!value) {
-      return null;
-    }
-
-    const hasSpecialChars = specialChars.some((char) => value.includes(char));
-
-    if (hasSpecialChars) {
-      return { hasSpecialChar: true };
-    } else {
-      null;
-    }
-  };
-}
+import {hasSpecialChar} from "../../validators/hasSpecialChars";
 
 @Component({
   selector: 'app-login-page',
