@@ -36,7 +36,9 @@ export class AuthService {
     }
   }
 
-  public register() {}
+  public register(value) {
+    console.log('register called with: ', value);
+  }
 
   public logout() {
     this.user$.next(null);

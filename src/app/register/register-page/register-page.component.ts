@@ -3,16 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.scss'],
 })
 export class RegisterPageComponent implements OnInit {
+  constructor() {}
 
-  constructor() {
-    console.log('constructor')
-  }
+  public onRegister() {}
 
   ngOnInit(): void {
-    console.log('onInit')
+    console.log('onInit');
   }
-
 }

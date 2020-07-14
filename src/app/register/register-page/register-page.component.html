@@ -7,25 +7,25 @@
     <div class="register-form">
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Username</mat-label>
-        <input type="text" matInput>
+        <input type="text" matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="password" matInput>
+        <input type="password" matInput />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Confirm Password</mat-label>
-        <input type="password" matInput>
+        <input type="password" matInput />
       </mat-form-field>
-
     </div>
-
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="accent">Register</button>
+    <button (click)="onRegister()" mat-raised-button color="accent">
+      Register
+    </button>
   </mat-card-actions>
 </mat-card>
