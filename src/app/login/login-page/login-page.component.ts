@@ -8,24 +8,7 @@ import {
   AbstractControl,
   FormBuilder,
 } from '@angular/forms';
-
-export function hasSpecialChar(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const specialChars = ['!', '@', '#', '$', '%'];
-    const value: string = control.value;
-    if (!value) {
-      return null;
-    }
-
-    const hasSpecialChars = specialChars.some((char) => value.includes(char));
-
-    if (hasSpecialChars) {
-      return { hasSpecialChar: true };
-    } else {
-      null;
-    }
-  };
-}
+import { CustomValidators } from 'src/CustomValidators';
 
 @Component({
   selector: 'app-login-page',
@@ -60,26 +43,46 @@ export class LoginPageComponent implements OnInit {
     return this.form.get('password');
   }
 
+  public get confirmPassword() {
+    return this.form.get('confirmPassword');
+  }
+
   constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(3), hasSpecialChar()],
-      ],
+    this.form = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        confirmEmail: ['', Validators.required],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            CustomValidators.hasSpecialChar(),
+          ],
+        ],
+        confirmPassword: ['', [Validators.required]],
+      },
+      {
+        validators: [
+          CustomValidators.fieldsMustMatch('password', 'confirmPassword'),
+          CustomValidators.fieldsMustMatch('email', 'confirmEmail'),
+        ],
+      }
+    );
 
-      address: this.fb.group({
-        city: ['', [Validators.required]],
-        zipCode: '',
-        street: '',
-        streetNumber: '',
-      }),
-    });
-
-    this.form.valueChanges.subscribe((status) => console.log(status));
+    this.form.valueChanges.subscribe((value) =>
+      console.log(this.password.errors, this.confirmPassword.errors)
+    );
   }
 
   ngOnInit(): void {}
+
+  public getFormErrorMessages() {
+    if (this.form.hasError('fieldsMustMatch')) {
+      const error = this.form.getError('fieldsMustMatch');
+      return `${error.field1} and ${error.field2} fields should match`;
+    }
+  }
 
   public getEmailErrorMessages() {
     if (this.email.hasError('required')) {
@@ -97,6 +100,8 @@ export class LoginPageComponent implements OnInit {
       return `minimum required length is ${error.requiredLength}`;
     } else if (this.password.hasError('hasSpecialChar')) {
       return 'no special chars allowed';
+    } else if (this.password.hasError('passwordMatch')) {
+      return 'passwords must match';
     }
   }
 
