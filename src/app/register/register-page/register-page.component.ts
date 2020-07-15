@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../auth.service";
-import {hasSpecialChar} from "../../validators/hasSpecialChars";
-import {ConfirmPwMatches} from "../../validators/confirmPwMatches";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../auth.service';
+import { hasSpecialChar } from '../../validators/hasSpecialChars';
+import { ConfirmPwMatches } from '../../validators/confirmPwMatches';
 
 @Component({
   selector: 'app-register-page',
@@ -27,31 +27,32 @@ export class RegisterPageComponent implements OnInit {
   }
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.minLength(3), hasSpecialChar()],
-      ],
+    this.form = this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        password: [
+          '',
+          [Validators.required, Validators.minLength(3), hasSpecialChar()],
+        ],
 
-      confirmPassword: [
-        '',
-        [Validators.required, Validators.minLength(3), hasSpecialChar()],
-      ],
+        confirmPassword: [
+          '',
+          [Validators.required, Validators.minLength(3), hasSpecialChar()],
+        ],
 
-      address: this.fb.group({
-        city: ['', [Validators.required]],
-        zipCode: '',
-        street: '',
-        streetNumber: '',
-
-      }),
-    }, {validator: ConfirmPwMatches(this.password.value, this.confirmPassword.value)} );
-    console.log(this.form)
+        address: this.fb.group({
+          city: ['', [Validators.required]],
+          zipCode: '',
+          street: '',
+          streetNumber: '',
+        }),
+      },
+      { validators: [ConfirmPwMatches('password', 'confirmPassword')] }
+    );
+    console.log(this.form);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public getEmailErrorMessages() {
     if (this.email.hasError('required')) {
@@ -84,9 +85,9 @@ export class RegisterPageComponent implements OnInit {
   }
 
   public onRegister() {
-    if (this.form.valid) { // possibly add (this.confirmPwForm.ConfirmPwMatches)...
+    if (this.form.valid) {
+      // possibly add (this.confirmPwForm.ConfirmPwMatches)...
       this.authService.register(this.form.value);
     }
   }
-
 }

@@ -7,47 +7,51 @@
     <mat-card-content class="login-form">
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email"/>
+        <input matInput formControlName="email" />
         <mat-error *ngIf="email.invalid">{{
           getEmailErrorMessages()
-          }}</mat-error>
+        }}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password"/>
+        <input matInput type="password" formControlName="password" />
         <mat-error *ngIf="password.invalid">{{
           getPasswordErrorMessages()
-          }}</mat-error>
+        }}</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Confirm password</mat-label>
-        <input matInput type="password" formControlName="confirmPassword"/>
+        <input matInput type="password" formControlName="confirmPassword" />
         <mat-error *ngIf="confirmPassword.invalid">{{
           getConfirmPasswordErrorMessages()
-          }}</mat-error>
+        }}</mat-error>
       </mat-form-field>
 
       <div formGroupName="address">
         <mat-label>Address</mat-label>
         <mat-form-field>
           <mat-label>City</mat-label>
-          <input matInput formControlName="city"/>
+          <input matInput formControlName="city" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Zip Code</mat-label>
-          <input matInput formControlName="zipCode"/>
+          <input matInput formControlName="zipCode" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Street</mat-label>
-          <input matInput formControlName="street"/>
+          <input matInput formControlName="street" />
         </mat-form-field>
         <mat-form-field>
           <mat-label>Street Number</mat-label>
-          <input matInput formControlName="streetNumber"/>
+          <input matInput formControlName="streetNumber" />
         </mat-form-field>
       </div>
+
+      <mat-error *ngIf="form.hasError('ConfirmPwMatches')"
+        >passwords dont match</mat-error
+      >
     </mat-card-content>
 
     <mat-card-actions>
