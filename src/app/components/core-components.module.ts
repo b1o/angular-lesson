@@ -4,16 +4,11 @@ import { MaterialModule } from '../material/material.module';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { ReverseStringPipe } from './pipes/reverse-string.pipe';
-
-
+import { PhoneInputComponent } from './phone-input/phone-input.component';
 
 @NgModule({
-  declarations: [NavbarComponent],
-  exports: [NavbarComponent],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    RouterModule
-  ]
+  declarations: [NavbarComponent, PhoneInputComponent],
+  exports: [NavbarComponent, PhoneInputComponent],
+  imports: [CommonModule, MaterialModule, RouterModule],
 })
-export class CoreComponentsModule { }
+export class CoreComponentsModule {}
