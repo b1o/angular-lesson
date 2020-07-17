@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { Route, RouterModule } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 const routes: Route[] = [
   {path: '', component: LoginPageComponent}
@@ -16,7 +16,7 @@ const routes: Route[] = [
         CommonModule,
         RouterModule.forChild(routes),
         MaterialModule,
-        FormsModule
+        ReactiveFormsModule
     ]
 })
 export class LoginModule { }

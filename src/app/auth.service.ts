@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class AuthService {
 
   private user$: BehaviorSubject<User> = new BehaviorSubject(null);
-  private testPassword = '123';
+  private testPassword = '123@';
   private users: User[] = [];
   constructor(private data: DataService, private router: Router) {
     data.getUsers().subscribe(users => this.users = users);
@@ -32,7 +32,10 @@ export class AuthService {
     }
   }
 
-  public register(){}
+  public register(value) {
+    console.log('register called with: ', value);
+    this.router.navigateByUrl('/login');
+  }
 
   public logout(){
     this.user$.next(null);

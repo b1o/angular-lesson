@@ -78,11 +78,8 @@ export class DataService {
   }
 
   public removePost(postId, userId){
-    const subscription = this.getPosts().subscribe(data => {
-      data[userId] = data[userId].filter(post => post.id != postId);
-      this.newPosts = data;
-    });
-    subscription.unsubscribe();
-    this.posts$.next(this.newPosts);
+    this.userIdPostsMappingTable[userId] =
+      this.userIdPostsMappingTable[userId].filter(post => post.id != postId);
+    this.posts$.next(this.userIdPostsMappingTable);
   }
 }

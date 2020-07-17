@@ -3,29 +3,71 @@
     <mat-card-title>Register</mat-card-title>
   </mat-card-header>
 
+  <form [formGroup]="form" (ngSubmit)="onRegister()">
   <mat-card-content>
+
     <div class="register-form">
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input type="text" matInput>
+        <input type="text" formControlName="email" matInput>
+        <mat-error *ngIf="email.invalid">
+          {{getEmailErrorMessages()}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Username</mat-label>
-        <input type="text" matInput>
+        <input type="text" formControlName="username" matInput>
+        <mat-error *ngIf="username.invalid">
+          {{getUsernameErrorMessages()}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="password" matInput>
+        <input type="password" formControlName="password" matInput>
+        <mat-error *ngIf="password.invalid">
+          {{getPasswordErrorMessages()}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Confirm Password</mat-label>
-        <input type="password" matInput>
+        <input type="password" formControlName="confirmPassword" matInput>
+        <mat-error *ngIf="password != confirmPassword">
+          {{getPasswordsMissmatchMessage()}}
+        </mat-error>
       </mat-form-field>
-
     </div>
 
+      <div formGroupName="address" class="register-form">
+        <mat-label>Address</mat-label>
+        <div>
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input type="text" matInput formControlName="city" />
+          <mat-error *ngIf="city.invalid">
+            {{getCityErrorMessages()}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Zip Code</mat-label>
+          <input type="text" matInput formControlName="zipCode" />
+        </mat-form-field>
+        </div>
+        <div>
+        <mat-form-field>
+          <mat-label>Street</mat-label>
+          <input type="text" matInput formControlName="street" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>No.</mat-label>
+          <input type="text" matInput formControlName="streetNumber" />
+        </mat-form-field>
+        </div>
+      </div>
+
+
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="accent">Register</button>
+  <mat-card-actions align="center">
+    <button type="submit" mat-raised-button color="accent">Register</button>
   </mat-card-actions>
+  </form>
 </mat-card>
